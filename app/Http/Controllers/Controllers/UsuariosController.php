@@ -4,18 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Publicacao;
 use Illuminate\Http\Request;
+use App\Models\Usuario;
 
-class PublicacoesController extends Controller
+class UsuariosController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Publicacao $publicacao)
+    public function index(Usuario $usuario)
     {
         $token = csrf_token();
-        $publicacoes = Publicacao::all();
+        $usuarios = Usuario::all();
         echo $token . "\n";
-        return $publicacoes;
+        return $usuarios;
     }
 
     /**
@@ -31,8 +32,8 @@ class PublicacoesController extends Controller
      */
     public function store(Request $request)
     {
-        Publicacao::create($request->all());
-        return 'Publicado com sucesso';
+        Usuario::create($request->all());
+        return 'criado com sucesso';
     }
 
     /**
@@ -54,19 +55,19 @@ class PublicacoesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Publicacao $publicacao)
+    public function update(Request $request, Usuario $usuario)
     {
-        $publicacao->fill($request->all());
-        $publicacao->save();
+        $usuario->fill($request->all());
+        $usuario->save();
         return "atualizado com sucesso";
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
-        Publicacao::destroy($id);
-        return 'Publicação deletado com sucesso';
+        Usuario::destroy($id);
+        return 'usuario deletado com sucesso';
     }
 }

@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Publicacao;
+use App\Models\FichadoLivro;
 use Illuminate\Http\Request;
 
-class PublicacoesController extends Controller
+class FichadosLivrosController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Publicacao $publicacao)
+    public function index(FichadoLivro $fichadoLivro)
     {
         $token = csrf_token();
-        $publicacoes = Publicacao::all();
+        $fichadosLivros = FichadoLivro::all();
         echo $token . "\n";
-        return $publicacoes;
+        return $fichadosLivros;
     }
 
     /**
@@ -31,8 +31,8 @@ class PublicacoesController extends Controller
      */
     public function store(Request $request)
     {
-        Publicacao::create($request->all());
-        return 'Publicado com sucesso';
+       FichadoLivro::create($request->all());
+       return "Criado com sucesso.";
     }
 
     /**
@@ -54,11 +54,11 @@ class PublicacoesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Publicacao $publicacao)
+    public function update(Request $request, FichadoLivro $fichadoLivro)
     {
-        $publicacao->fill($request->all());
-        $publicacao->save();
-        return "atualizado com sucesso";
+        $fichadoLivro->fill($request->all());
+        $fichadoLivro->save();
+        return "Atualizado com sucesso";
     }
 
     /**
@@ -66,7 +66,7 @@ class PublicacoesController extends Controller
      */
     public function destroy(string $id)
     {
-        Publicacao::destroy($id);
-        return 'Publicação deletado com sucesso';
+       FichadoLivro::destroy($id);
+       return "Ficha do livro deletado com sucesso";
     }
 }

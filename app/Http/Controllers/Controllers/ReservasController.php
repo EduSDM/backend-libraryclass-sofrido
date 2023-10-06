@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Publicacao;
+use App\Models\Reserva;
 use Illuminate\Http\Request;
 
-class PublicacoesController extends Controller
+class ReservasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Publicacao $publicacao)
+    public function index(Reserva $reserva)
     {
         $token = csrf_token();
-        $publicacoes = Publicacao::all();
+        $reservas = Reserva::all();
         echo $token . "\n";
-        return $publicacoes;
+        return $reservas;
     }
 
     /**
@@ -31,8 +31,8 @@ class PublicacoesController extends Controller
      */
     public function store(Request $request)
     {
-        Publicacao::create($request->all());
-        return 'Publicado com sucesso';
+       Reserva::create($request->all());
+       return "Criado com sucesso.";
     }
 
     /**
@@ -54,11 +54,11 @@ class PublicacoesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Publicacao $publicacao)
+    public function update(Request $request, Reserva $reserva)
     {
-        $publicacao->fill($request->all());
-        $publicacao->save();
-        return "atualizado com sucesso";
+       $reserva->fill($request->all());
+       $reserva->save();
+       return "atualizado com sucesso.";
     }
 
     /**
@@ -66,7 +66,7 @@ class PublicacoesController extends Controller
      */
     public function destroy(string $id)
     {
-        Publicacao::destroy($id);
-        return 'Publicação deletado com sucesso';
+        Reserva::destroy($id);
+        return "Deletado com sucesso";
     }
 }
