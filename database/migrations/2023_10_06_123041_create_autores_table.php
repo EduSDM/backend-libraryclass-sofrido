@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Usuario;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reservas', function (Blueprint $table) {
-            $table->string('id_reservas');
-            $table->date('data_reservas');
-            $table->foreignIdFor(Usuario::class,"id_usuarios");
-            $table->string('status');
+        Schema::create('autores', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
         });
     }
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reservas');
+        Schema::dropIfExists('autores');
     }
 };

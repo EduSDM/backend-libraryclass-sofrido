@@ -12,6 +12,6 @@ class Reserva extends Model
     protected $table = "reservas";
     protected $primaryKey = "id_reservas";
 
-    protected $fillable = ["id_reservas","data_reservas", "status_reservas", "fk_ "];
+    protected $fillable = ["id_reservas","data_reservas", "status_reservas", "id_usuarios"];
 
 }

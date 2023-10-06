@@ -54,9 +54,12 @@ class AutoresController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Autor $autores)
+    public function update(Request $request, Autor $autor)
     {
-        
+      
+        $autor->fill($request->all());
+        $autor->save();
+        return "atualizado com sucesso";
     }
 
     /**
@@ -64,6 +67,7 @@ class AutoresController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Autor::destroy($id);
+        return "deletado com sucesso.";
     }
 }
