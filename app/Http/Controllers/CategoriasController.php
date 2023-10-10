@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 
 class CategoriasController extends Controller
@@ -9,9 +10,12 @@ class CategoriasController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Categoria $categoria)
     {
-        //
+        $token = csrf_token();
+        $categorias = Categoria::all();
+        echo $token . "\n";
+        return $categorias;
     }
 
     /**
@@ -27,7 +31,8 @@ class CategoriasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Categoria::created($request->all());
+        return "criado com sucesso";
     }
 
     /**
@@ -49,9 +54,11 @@ class CategoriasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Categoria $categoria)
     {
-        //
+        $categoria->fill($request->all());
+        $categoria->save();
+        return "atualizado com sucesso";
     }
 
     /**
@@ -59,6 +66,8 @@ class CategoriasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Categoria::destroy($id);
+        return "deletado com sucesso";
+
     }
 }

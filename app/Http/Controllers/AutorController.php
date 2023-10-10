@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mural;
-use App\Models\Publicacao;
+use App\Models\Autor;
 use Illuminate\Http\Request;
 
-class MuraisController extends Controller
+class AutorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Mural $mural)
+    public function index(Autor $autor)
     {
         $token = csrf_token();
-        $murais = Mural::all();
+        $autor = Autor::all();
         echo $token . "\n";
-        return $murais;
+        return  $autor; 
     }
 
     /**
@@ -32,8 +31,8 @@ class MuraisController extends Controller
      */
     public function store(Request $request)
     {
-        Mural::create($request->all());
-        return 'Criado com sucesso';
+        Autor::create($request->all());
+        return "Criado com sucesso";
     }
 
     /**
@@ -55,10 +54,10 @@ class MuraisController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Mural $mural)
+    public function update(Request $request, Autor $autor)
     {
-        $mural->fill($request->all());
-        $mural->save();
+        $autor->fill($request->all());
+        $autor->save();
         return "atualizado com sucesso";
     }
 
@@ -67,7 +66,7 @@ class MuraisController extends Controller
      */
     public function destroy(string $id)
     {
-        Mural::destroy($id);
-        return "Mural deletado com sucesso";
+        Autor::destroy($id);
+        return "Deletado com sucesso";
     }
 }

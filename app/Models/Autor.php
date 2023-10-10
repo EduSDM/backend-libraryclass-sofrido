@@ -9,8 +9,8 @@ class Autor extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["id_autores", "nome_autores", "nacionalidade_autores"];
-    protected $primaryKey = 'id_autores';
+    protected $fillable=['autor_nome','autor_nacionalidade'];
 
-  
+    protected $table='autors';
+    
 }

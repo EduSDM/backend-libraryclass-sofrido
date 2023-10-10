@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Livro;
 use Illuminate\Http\Request;
 
 class LivrosController extends Controller
@@ -9,9 +10,12 @@ class LivrosController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Livro $livro)
     {
-        //
+        $token = csrf_token();
+        $livros = Livro::all();
+        echo $token . "\n";
+        return $livros;
     }
 
     /**
@@ -27,7 +31,8 @@ class LivrosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Livro::create($request->all());
+        return 'criado com sucesso';
     }
 
     /**
@@ -49,9 +54,11 @@ class LivrosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Livro $livro)
     {
-        //
+        $livro->fill($request->all());
+        $livro->save();
+        return "atualizado com sucesso";
     }
 
     /**
@@ -59,6 +66,7 @@ class LivrosController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Livro::destroy($id);
+        return 'deletado com sucesso';
     }
 }

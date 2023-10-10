@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Usuario;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,7 +13,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('emprestimos', function (Blueprint $table) {
-            $table->id();
+            $table->string("id_emprestimos");
+            $table->date("data_emprestimos");
+            $table->foreignIdFor(Usuario::class,"id_usuarios");
             $table->timestamps();
         });
     }

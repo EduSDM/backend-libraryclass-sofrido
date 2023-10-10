@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Resenha;
 use Illuminate\Http\Request;
 
 class ResenhasController extends Controller
@@ -9,9 +10,12 @@ class ResenhasController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Resenha $resenha)
     {
-        //
+        $token = csrf_token();
+        $resenhas = Resenha::all();
+        echo $token . "\n";
+        return $resenhas;
     }
 
     /**
@@ -27,7 +31,8 @@ class ResenhasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Resenha::create($request->all());
+        return 'Criado com sucesso';
     }
 
     /**
@@ -49,9 +54,11 @@ class ResenhasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Resenha $resenha)
     {
-        //
+        $resenha->fill($request->all());
+        $resenha->save();
+        return "atualizado com sucesso";
     }
 
     /**
@@ -59,6 +66,7 @@ class ResenhasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Resenha::destroy($id);
+        return 'Deletado com sucesso';
     }
 }

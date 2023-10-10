@@ -67,6 +67,6 @@ class FichadosLivrosController extends Controller
     public function destroy(string $id)
     {
        FichadoLivro::destroy($id);
-       return "Ficha do livro deletado com sucesso";
+       return "Deletado com sucesso";
     }
 }

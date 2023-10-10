@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Multa;
 use Illuminate\Http\Request;
 
 class MultasController extends Controller
@@ -9,9 +10,12 @@ class MultasController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Multa $multa)
     {
-        //
+        $token = csrf_token();
+        $multas = Multa::all();
+        echo $token . "\n";
+        return $multas;
     }
 
     /**
@@ -27,7 +31,8 @@ class MultasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Multa::create($request->all());
+        return 'criado com sucesso';
     }
 
     /**
@@ -49,9 +54,11 @@ class MultasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Multa $multa)
     {
-        //
+        $multa->fill($request->all());
+        $multa->save();
+        return "atualizado com sucesso";
     }
 
     /**
@@ -59,6 +66,7 @@ class MultasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Multa::destroy($id);
+        return 'deletado com sucesso';
     }
 }

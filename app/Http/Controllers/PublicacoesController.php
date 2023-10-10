@@ -32,7 +32,7 @@ class PublicacoesController extends Controller
     public function store(Request $request)
     {
         Publicacao::create($request->all());
-        return 'Publicado com sucesso';
+        return 'Criado com sucesso';
     }
 
     /**
@@ -67,6 +67,6 @@ class PublicacoesController extends Controller
     public function destroy(string $id)
     {
         Publicacao::destroy($id);
-        return 'Publicação deletado com sucesso';
+        return 'Deletado com sucesso';
     }
 }

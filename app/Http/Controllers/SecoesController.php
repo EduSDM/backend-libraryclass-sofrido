@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Secao;
 use Illuminate\Http\Request;
 
 class SecoesController extends Controller
@@ -9,9 +10,12 @@ class SecoesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Secao $secao)
     {
-        //
+        $token = csrf_token();
+        $secoes = Secao::all();
+        echo $token . "\n";
+        return $secoes;
     }
 
     /**
@@ -27,7 +31,8 @@ class SecoesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Secao::create($request->all());
+        return 'criado com sucesso';
     }
 
     /**
@@ -49,9 +54,11 @@ class SecoesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Secao $secao)
     {
-        //
+        $secao->fill($request->all());
+        $secao->save();
+        return "atualizado com sucesso";
     }
 
     /**
@@ -59,6 +66,7 @@ class SecoesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Secao::destroy($id);
+        return 'Deletado com sucesso';
     }
 }

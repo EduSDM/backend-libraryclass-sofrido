@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AvaliacaoPeriodica;
 use Illuminate\Http\Request;
 
 class AvaliacoesPeriodicasController extends Controller
@@ -9,9 +10,12 @@ class AvaliacoesPeriodicasController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index( AvaliacaoPeriodica $avaliacaoPeriodica)
     {
-        //
+        $token = csrf_token();
+        $avaliacoesPeriodicas = AvaliacaoPeriodica::all();
+        echo $token . "\n";
+        return $avaliacoesPeriodicas;
     }
 
     /**
@@ -27,7 +31,8 @@ class AvaliacoesPeriodicasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      AvaliacaoPeriodica::created($request->all());
+      return "criado com sucesso";
     }
 
     /**
@@ -49,9 +54,12 @@ class AvaliacoesPeriodicasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, AvaliacaoPeriodica $avaliacaoPeriodica)
     {
-        //
+        $avaliacaoPeriodica->fill($request->all());
+        $avaliacaoPeriodica->save();
+        return "atualizado com sucesso";
+        
     }
 
     /**
@@ -59,6 +67,7 @@ class AvaliacoesPeriodicasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        AvaliacaoPeriodica::destroy($id);
+        return "deletado com sucesso.";
     }
 }

@@ -68,6 +68,6 @@ class MuraisController extends Controller
     public function destroy(string $id)
     {
         Mural::destroy($id);
-        return "Mural deletado com sucesso";
+        return "Deletado com sucesso";
     }
 }
