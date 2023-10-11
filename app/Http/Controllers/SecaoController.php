@@ -5,17 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Secao;
 use Illuminate\Http\Request;
 
-class SecoesController extends Controller
+class SecaoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Secao $secao)
+    public function index()
     {
-        $token = csrf_token();
-        $secoes = Secao::all();
-        echo $token . "\n";
-        return $secoes;
+        return Secao::all();
     }
 
     /**
@@ -32,7 +29,7 @@ class SecoesController extends Controller
     public function store(Request $request)
     {
         Secao::create($request->all());
-        return 'criado com sucesso';
+        return 'secao criada com sucesso';
     }
 
     /**
@@ -54,11 +51,11 @@ class SecoesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Secao $secao)
+    public function update(Request $request,string $id)
     {
-        $secao->fill($request->all());
-        $secao->save();
-        return "atualizado com sucesso";
+        $descricao=$request->input('descricao');
+        Secao::where('íd_secao',$id)->update(['descricao' => $descricao]);
+        return  'átualizado com sucesso';
     }
 
     /**
@@ -67,6 +64,6 @@ class SecoesController extends Controller
     public function destroy(string $id)
     {
         Secao::destroy($id);
-        return 'Deletado com sucesso';
+        return 'secao apagada com sucesso';
     }
 }
