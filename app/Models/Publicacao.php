@@ -13,7 +13,7 @@ class Publicacao extends Model
     
     protected $fillable=["id_publicacao", "mural_id_mural", "usuario_id_usuarios", "mensagem"];
     public function usuarios(){
-       return $this->hasMany(Usuario::class);
+       return $this->hasMany(User::class);
 
     }
     public function murais(){

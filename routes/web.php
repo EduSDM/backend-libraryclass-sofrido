@@ -20,8 +20,15 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::resource('/usuarios', UsuariosController::class);
+Route::resource('/users', UsuariosController::class);
+Route::get('/login',[UsuariosController::class,"telaLogin"])->name("login");
+Route::post('/login',[UsuariosController::class,"login"]);
+Route::get('/logout',[UsuariosController::class,"logout"])->name("logout");
 
+Route::middleware(['autenticador'])->group(function (){
+Route::get('/', function () {
+    return "ola";
+});
 Route::resource('/publicacoes', PublicacoesController::class);
 Route::resource('/murais', MuraisController::class);
 Route::resource('/autor', AutorController::class);
@@ -34,16 +41,8 @@ Route::resource('/devolucaos', DevolucoesController::class);
 Route::resource('/categorias', CategoriasController::class);
 Route::resource('/avaliacaoPeriodicas', AvaliacoesPeriodicasController::class);
 Route::resource('/secoes', SecaoController::class);
-
 Route::get('/token', function () {
     $token = csrf_token();
     return $token;
 });
-
-
-Route::get('/', function () {
-    return "ola";
-})->middleware(Autenticador::class);
-
-Route::get('/login',[UsuariosController::class,"telaLogin"])->name("login");
-Route::post('/login',[UsuariosController::class,"login"]);
+});

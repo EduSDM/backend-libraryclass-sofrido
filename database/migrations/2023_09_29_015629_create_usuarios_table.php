@@ -16,12 +16,15 @@ return new class extends Migration
             $table->string('nome',200);
             $table->char('tipo',1);
             $table->string('cep',10);
-            $table->integer('numero_casa',4);
+            $table->unsignedBigInteger('numero_casa');
             $table->string('email',100)->unique();
             $table->string('password');
             $table->string('telefone',25);
             $table->string('observacoes',255);
+            $table->rememberToken();
+            $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
+           
         });
     }
 

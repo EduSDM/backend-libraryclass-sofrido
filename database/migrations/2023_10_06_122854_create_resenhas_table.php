@@ -1,7 +1,8 @@
 <?php
 
 use App\Models\Livro;
-use App\Models\Usuario;
+
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +18,7 @@ return new class extends Migration
             $table->id('id_resenhas');
             $table->string('titulo_resenhas');
             $table->timestamps();
-            $table->foreignIdFor(Usuario::class, "id_usuarios");
+            $table->foreignIdFor(User::class, "id_usuarios");
             $table->foreignIdFor(Livro::class,"isbn_livros");
         });
     }

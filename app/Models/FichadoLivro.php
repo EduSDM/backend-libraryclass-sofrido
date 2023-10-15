@@ -16,7 +16,7 @@ class FichadoLivro extends Model
 
     public function usuarios()
     {
-        return $this->belongsTo(Usuario::class);
+        return $this->belongsTo(User::class);
 
     }
 }

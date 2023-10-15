@@ -3,20 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Publicacao;
-use App\Models\Usuario;
+use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldBeUniqueUntilProcessing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsuariosController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Usuario $usuario)
+    public function index()
     {
         $token = csrf_token();
-        $usuarios = Usuario::all();
+        $usuarios = User::all();
         echo $token . "\n";
         return $usuarios;
     }
@@ -34,7 +35,12 @@ class UsuariosController extends Controller
      */
     public function store(Request $request)
     {
-        Usuario::create($request->all());
+        $dados=$request->except("password");
+        $senha=$request->input("password");
+        $senhacripto=Hash::make($senha);
+        $dados["password"]=$senhacripto;
+       
+        User::create($dados);
         return 'criado com sucesso';
     }
 
@@ -58,7 +64,7 @@ class UsuariosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Usuario $usuario)
+    public function update(Request $request, User $usuario)
     {
         $usuario->fill($request->all());
         $usuario->save();
@@ -70,7 +76,7 @@ class UsuariosController extends Controller
      */
     public function destroy(int $id)
     {
-        Usuario::destroy($id);
+        User::destroy($id);
         return 'usuario deletado com sucesso';
     }
 
@@ -91,5 +97,12 @@ class UsuariosController extends Controller
 
     public function telaLogin(){
         return "essa e a tela de login";
+    }
+
+    public function logout(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect("/");
     }
 }
