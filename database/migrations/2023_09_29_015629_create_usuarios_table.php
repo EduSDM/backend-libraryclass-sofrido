@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('cep',10);
             $table->integer('numero_casa',4);
             $table->string('email',100)->unique();
-            $table->string('senha');
+            $table->string('password');
             $table->string('telefone',25);
+            $table->string('observacoes',255);
             $table->timestamps();
         });
     }

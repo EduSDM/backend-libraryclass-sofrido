@@ -55,12 +55,13 @@ class MuraisController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Mural $mural)
+    public function update(Request $request, string $id)
     {
-        $mural->fill($request->all());
-        $mural->save();
-        return "atualizado com sucesso";
+        $descricao=$request->input('descricao');
+       Mural::where('id_mural',$id)->update(['descricao' => $descricao]);
+        return  'átualizado com sucesso';
     }
+    
 
     /**
      * Remove the specified resource from storage.

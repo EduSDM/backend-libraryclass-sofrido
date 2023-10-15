@@ -15,11 +15,13 @@ use App\Http\Controllers\ReservasController;
 use App\Http\Controllers\SecaoController;
 use App\Http\Controllers\UsuariosController;
 
+use App\Http\Middleware\Autenticador;
 use Illuminate\Support\Facades\Route;
 
 
 
 Route::resource('/usuarios', UsuariosController::class);
+
 Route::resource('/publicacoes', PublicacoesController::class);
 Route::resource('/murais', MuraisController::class);
 Route::resource('/autor', AutorController::class);
@@ -37,3 +39,11 @@ Route::get('/token', function () {
     $token = csrf_token();
     return $token;
 });
+
+
+Route::get('/', function () {
+    return "ola";
+})->middleware(Autenticador::class);
+
+Route::get('/login',[UsuariosController::class,"telaLogin"])->name("login");
+Route::post('/login',[UsuariosController::class,"login"]);

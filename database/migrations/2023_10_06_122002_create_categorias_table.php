@@ -13,9 +13,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('categorias', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_categorias');
             $table->timestamps();
-            $table->foreignIdFor(Secao::class, "id_secoes");
+            $table->foreignIdFor(Secao::class, "id_secao");
         });
     }
 

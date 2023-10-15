@@ -31,7 +31,7 @@ class AvaliacoesPeriodicasController extends Controller
      */
     public function store(Request $request)
     {
-      AvaliacaoPeriodica::created($request->all());
+      AvaliacaoPeriodica::create($request->all());
       return "criado com sucesso";
     }
 

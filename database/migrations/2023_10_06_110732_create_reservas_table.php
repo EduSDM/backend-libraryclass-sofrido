@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('reservas', function (Blueprint $table) {
             $table->string('id_reservas');
             $table->date('data_reservas');
+            $table->string('status_reservas');
             $table->foreignIdFor(Usuario::class,"id_usuarios");
-            $table->string('status');
             $table->timestamps();
         });
     }

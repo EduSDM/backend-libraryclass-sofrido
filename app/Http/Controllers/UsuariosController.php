@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Publicacao;
-use Illuminate\Http\Request;
 use App\Models\Usuario;
+use Illuminate\Contracts\Queue\ShouldBeUniqueUntilProcessing;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsuariosController extends Controller
 {
@@ -43,6 +45,7 @@ class UsuariosController extends Controller
     {
         //
     }
+  
 
     /**
      * Show the form for editing the specified resource.
@@ -69,5 +72,24 @@ class UsuariosController extends Controller
     {
         Usuario::destroy($id);
         return 'usuario deletado com sucesso';
+    }
+
+    public function login(Request $request)
+    {
+        $dados = $request->only("email","password");//pega tudo enviado pela requisicao 
+        
+       
+       if (Auth::attempt($dados)) {
+       
+        return "usuario logado com susseco";
+       }
+       else{
+        return "usuario ou senha incoretos";
+       }
+       
+    }
+
+    public function telaLogin(){
+        return "essa e a tela de login";
     }
 }

@@ -31,7 +31,7 @@ class CategoriasController extends Controller
      */
     public function store(Request $request)
     {
-        Categoria::created($request->all());
+        Categoria::create($request->all());
         return "criado com sucesso";
     }
 

@@ -13,9 +13,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('livros', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->foreignIdFor(Secao::class, "id_secoes");
+            $table->string('isbn_livros')->primary()->unique();
+            $table->string('titulo_livros');
+            $table->string('foto_livros');
+            $table->string('sinopse_livros');
+            $table->foreignIdFor(Secao::class, "id_secao");
+           
         });
     }
 

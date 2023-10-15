@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('avaliacoesperiodicas', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_avaliacoesPeriodicas');
             $table->timestamps();
             $table->foreignIdFor(Livro::class, "isbn_livros"); 
         });

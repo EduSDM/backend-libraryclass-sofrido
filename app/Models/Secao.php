@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Secao extends Model
 {
     use HasFactory;
-    protected $primaryKey='íd_secao';
+    protected $primaryKey = 'íd_secao';
     protected $fillable = ["descricao"];
-
+    protected $table = 'secoes';
 }

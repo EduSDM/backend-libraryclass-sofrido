@@ -12,7 +12,6 @@ class Publicacao extends Model
     protected $primaryKey="id_publicacoes";
     
     protected $fillable=["id_publicacao", "mural_id_mural", "usuario_id_usuarios", "mensagem"];
-
     public function usuarios(){
        return $this->hasMany(Usuario::class);
 
