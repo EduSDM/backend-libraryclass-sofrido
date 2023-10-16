@@ -15,11 +15,12 @@ class Autenticador
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, $level): Response
     {
         if(!Auth::check()){
             throw new AuthenticationException();
         }
+        if (auth()->check())
         return $next($request);
     }
 }
