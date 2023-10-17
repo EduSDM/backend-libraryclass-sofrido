@@ -35,13 +35,15 @@ class UsuariosController extends Controller
      */
     public function store(Request $request)
     {
-        $dados=$request->except("password");
-        $senha=$request->input("password");
-        $senhacripto=Hash::make($senha);
-        $dados["password"]=$senhacripto;
-       
+        $dados = $request->except("password");
+        $senha = $request->input("password");
+        $senhacripto = Hash::make($senha);
+        $dados["password"] = $senhacripto;
+
         User::create($dados);
         return 'criado com sucesso';
+
+
     }
 
     /**
@@ -51,7 +53,7 @@ class UsuariosController extends Controller
     {
         //
     }
-  
+
 
     /**
      * Show the form for editing the specified resource.
@@ -82,24 +84,34 @@ class UsuariosController extends Controller
 
     public function login(Request $request)
     {
-        $dados = $request->only("email","password");//pega tudo enviado pela requisicao 
-        
-       
-       if (Auth::attempt($dados)) {
-       
-        return "usuario logado com susseco";
-       }
-       else{
-        return "usuario ou senha incoretos";
-       }
-       
+        $dados = $request->only("email", "password"); //pega tudo enviado pela requisicao 
+
+
+        if (Auth::attempt($dados)) {
+            $tipoDoUsuario = Auth::user()->tipo;
+            if ($tipoDoUsuario == 1) {
+                session(['tipo' => 'usuario comum']);
+            } elseif ($tipoDoUsuario == 2) {
+                session(['tipo' => 'administrador']);
+            } elseif ($tipoDoUsuario == 3) {
+                session(['tipo' => 'coordenador']);
+            } elseif ($tipoDoUsuario == 4) {
+                session(['tipo' => 'diretor']);
+            }
+            return "usuario logado com susseco";
+        } else {
+            return "usuario ou senha incoretos";
+        }
+
     }
 
-    public function telaLogin(){
+    public function telaLogin()
+    {
         return "essa e a tela de login";
     }
 
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

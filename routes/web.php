@@ -38,7 +38,7 @@ Route::resource('/multas', MultasController::class);
 Route::resource('/livros', LivrosController::class);
 Route::resource('/emprestimos', EmprestimosController::class);
 Route::resource('/devolucaos', DevolucoesController::class);
-Route::resource('/categorias', CategoriasController::class);
+Route::resource('/categorias', CategoriasController::class);  
 Route::resource('/avaliacaoPeriodicas', AvaliacoesPeriodicasController::class);
 Route::resource('/secoes', SecaoController::class);
 Route::get('/token', function () {
