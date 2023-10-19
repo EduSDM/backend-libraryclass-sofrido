@@ -19,6 +19,14 @@ class Autenticador
     {
         if(!Auth::check()){
             throw new AuthenticationException();
+            if (Auth::user()->tipo == 1) {
+                return $next($request);
+            }
+            if (Auth::check() && Auth::user()->tipo != 1) {
+                //se o usuario estiver logado e o tipo dele nao for usuariocomum ele vai ser redirecionado para login
+                return redirect('/login');
+            }
+          
         }
         
         return $next($request);

@@ -92,7 +92,7 @@ class UsuariosController extends Controller
             if ($tipoDoUsuario == 1) {
                 session(['tipo' => 'usuario comum']);
             } elseif ($tipoDoUsuario == 2) {
-                session(['tipo' => 'administrador']);
+                session(['tipo' => 'professor']);
             } elseif ($tipoDoUsuario == 3) {
                 session(['tipo' => 'coordenador']);
             } elseif ($tipoDoUsuario == 4) {

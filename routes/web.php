@@ -21,28 +21,70 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::resource('/users', UsuariosController::class);
-Route::get('/login',[UsuariosController::class,"telaLogin"])->name("login");
-Route::post('/login',[UsuariosController::class,"login"]);
-Route::get('/logout',[UsuariosController::class,"logout"])->name("logout");
+Route::get('/login', [UsuariosController::class, "telaLogin"])->name("login");
+Route::post('/login', [UsuariosController::class, "login"]);
 
-Route::middleware(['autenticador'])->group(function (){
-Route::get('/', function () {
-    return "ola";
-});
-Route::resource('/publicacoes', PublicacoesController::class);
-Route::resource('/murais', MuraisController::class);
-Route::resource('/autor', AutorController::class);
-Route::resource('/resenhas', ResenhasController::class);
-Route::resource('/reservas', ReservasController::class);
-Route::resource('/multas', MultasController::class);
-Route::resource('/livros', LivrosController::class);
-Route::resource('/emprestimos', EmprestimosController::class);
-Route::resource('/devolucaos', DevolucoesController::class);
-Route::resource('/categorias', CategoriasController::class);  
-Route::resource('/avaliacaoPeriodicas', AvaliacoesPeriodicasController::class);
-Route::resource('/secoes', SecaoController::class);
-Route::get('/token', function () {
-    $token = csrf_token();
-    return $token;
-});
+Route::middleware(['autenticador'])->group(function () {
+    //usuario comum
+    Route::get('/logout', [UsuariosController::class, "logout"])->name("logout");
+
+    Route::get('/publicacoes', [PublicacoesController::class, 'index']);
+    Route::get('/murais', [MuraisController::class, 'index']);
+    Route::get('/autor', [AutorController::class, 'index']);
+    Route::resource('/resenhas', ResenhasController::class);
+    Route::get('/reservas', [ReservasController::class, 'index']);
+    //Route::resource('/multas', MultasController::class);
+    Route::get('/livros', [LivrosController::class, 'index']);
+    Route::get('/emprestimos', [EmprestimosController::class, 'index']);
+    Route::get('/devolucaos', [DevolucoesController::class, 'index']);
+    Route::get('/categorias', [CategoriasController::class, 'index']);
+    // Route::resource('/avaliacaoPeriodicas', AvaliacoesPeriodicasController::class);
+    Route::get('/secoes', [SecaoController::class, 'index']);
+
+    //diretor 
+    Route::middleware(['diretor'])->group(function () {
+        Route::resource('/publicacoes', PublicacoesController::class);
+        Route::resource('/murais', MuraisController::class);
+        Route::resource('/autor', AutorController::class);
+        Route::resource('/resenhas', ResenhasController::class);
+        Route::resource('/reservas', ReservasController::class);
+        //Route::resource('/multas', MultasController::class);
+        Route::resource('/livros', LivrosController::class);
+        Route::resource('/emprestimos', EmprestimosController::class);
+        Route::resource('/devolucaos', DevolucoesController::class);
+        Route::resource('/categorias', CategoriasController::class);
+        Route::resource('/avaliacaoPeriodicas', AvaliacoesPeriodicasController::class);
+        Route::resource('/secoes', SecaoController::class);
+    });
+    //coordenador
+    Route::middleware(['coordenador'])->group(function () {
+        Route::resource('/publicacoes', PublicacoesController::class);
+        Route::resource('/murais', MuraisController::class);
+        Route::resource('/autor', AutorController::class);
+        Route::resource('/resenhas', ResenhasController::class);
+        Route::resource('/reservas', ReservasController::class);
+        //Route::resource('/multas', MultasController::class);
+        Route::resource('/livros', LivrosController::class);
+        Route::resource('/emprestimos', EmprestimosController::class);
+        Route::resource('/devolucaos', DevolucoesController::class);
+        Route::resource('/categorias', CategoriasController::class);
+        Route::resource('/avaliacaoPeriodicas', AvaliacoesPeriodicasController::class);
+        Route::resource('/secoes', SecaoController::class);
+    });
+    //professor
+    Route::middleware(['professor'])->group(function () {
+        // Route::resource('/publicacoes', PublicacoesController::class);
+        Route::resource('/publicacoes', PublicacoesController::class, );
+        Route::get('/murais', [MuraisController::class, 'index']);
+        Route::resource('/autor', AutorController::class);
+        Route::resource('/resenhas', ResenhasController::class);
+        Route::resource('/reservas', ReservasController::class);
+        //Route::resource('/multas', MultasController::class);
+        Route::resource('/livros', LivrosController::class);
+        Route::resource('/emprestimos', EmprestimosController::class);
+        Route::resource('/devolucaos', DevolucoesController::class);
+        Route::resource('/categorias', CategoriasController::class);
+        Route::resource('/avaliacaoPeriodicas', AvaliacoesPeriodicasController::class);
+        Route::resource('/secoes', SecaoController::class);
+    });
 });
