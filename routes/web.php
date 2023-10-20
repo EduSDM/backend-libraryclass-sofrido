@@ -13,6 +13,7 @@ use App\Http\Controllers\PublicacoesController;
 use App\Http\Controllers\ResenhasController;
 use App\Http\Controllers\ReservasController;
 use App\Http\Controllers\SecaoController;
+use App\Http\Controllers\SecoesController;
 use App\Http\Controllers\UsuariosController;
 
 use App\Http\Middleware\Autenticador;
@@ -39,7 +40,7 @@ Route::middleware(['autenticador'])->group(function () {
     Route::get('/devolucaos', [DevolucoesController::class, 'index']);
     Route::get('/categorias', [CategoriasController::class, 'index']);
     // Route::resource('/avaliacaoPeriodicas', AvaliacoesPeriodicasController::class);
-    Route::get('/secoes', [SecaoController::class, 'index']);
+    Route::get('/secoes', [SecoesController::class, 'index']);
 
     //diretor 
     Route::middleware(['diretor'])->group(function () {
@@ -54,7 +55,7 @@ Route::middleware(['autenticador'])->group(function () {
         Route::resource('/devolucaos', DevolucoesController::class);
         Route::resource('/categorias', CategoriasController::class);
         Route::resource('/avaliacaoPeriodicas', AvaliacoesPeriodicasController::class);
-        Route::resource('/secoes', SecaoController::class);
+        Route::resource('/secoes', SecoesController::class);
     });
     //coordenador
     Route::middleware(['coordenador'])->group(function () {
@@ -69,7 +70,7 @@ Route::middleware(['autenticador'])->group(function () {
         Route::resource('/devolucaos', DevolucoesController::class);
         Route::resource('/categorias', CategoriasController::class);
         Route::resource('/avaliacaoPeriodicas', AvaliacoesPeriodicasController::class);
-        Route::resource('/secoes', SecaoController::class);
+        Route::resource('/secoes', SecoesController::class);
     });
     //professor
     Route::middleware(['professor'])->group(function () {
@@ -85,6 +86,6 @@ Route::middleware(['autenticador'])->group(function () {
         Route::resource('/devolucaos', DevolucoesController::class);
         Route::resource('/categorias', CategoriasController::class);
         Route::resource('/avaliacaoPeriodicas', AvaliacoesPeriodicasController::class);
-        Route::resource('/secoes', SecaoController::class);
+        Route::resource('/secoes', SecoesController::class);
     });
 });

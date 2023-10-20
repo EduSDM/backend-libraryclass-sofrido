@@ -12,7 +12,11 @@ class SecoesController extends Controller
      */
     public function index()
     {
-        return Secao::all();
+        $token = csrf_token();
+        $reservas = Secao::all();
+        echo $token . "\n";
+        return $reservas;
+       // return Secao::all();
     }
 
     /**
