@@ -34,7 +34,7 @@ Route::middleware(['autenticador'])->group(function () {
     Route::get('/autor', [AutorController::class, 'index']);
     Route::resource('/resenhas', ResenhasController::class);
     Route::get('/reservas', [ReservasController::class, 'index']);
-    //Route::resource('/multas', MultasController::class);
+    //Route::resource('/multas', MultasController::class); 
     Route::get('/livros', [LivrosController::class, 'index']);
     Route::get('/emprestimos', [EmprestimosController::class, 'index']);
     Route::get('/devolucaos', [DevolucoesController::class, 'index']);

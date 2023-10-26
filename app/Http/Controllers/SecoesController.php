@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Secao;
 use Illuminate\Http\Request;
 
-class SecoesController extends Controller
+class  SecoesController extends Controller
 {
     /**
      * Display a listing of the resource.
