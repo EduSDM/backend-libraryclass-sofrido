@@ -17,6 +17,7 @@ return new class extends Migration
         Schema::create('resenhas', function (Blueprint $table) {
             $table->id('id_resenhas');
             $table->string('titulo_resenhas');
+            $table->string('descricao_resenhas');
             $table->timestamps();
             $table->foreignIdFor(User::class, "id_usuarios");
             $table->foreignIdFor(Livro::class,"isbn_livros");

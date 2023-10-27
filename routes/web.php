@@ -1,25 +1,21 @@
 <?php
 
 use App\Http\Controllers\AutorController;
-
 use App\Http\Controllers\AvaliacoesPeriodicasController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\DevolucoesController;
 use App\Http\Controllers\EmprestimosController;
 use App\Http\Controllers\LivrosController;
-use App\Http\Controllers\MultasController;
 use App\Http\Controllers\MuraisController;
 use App\Http\Controllers\PublicacoesController;
 use App\Http\Controllers\ResenhasController;
 use App\Http\Controllers\ReservasController;
-use App\Http\Controllers\SecaoController;
 use App\Http\Controllers\SecoesController;
 use App\Http\Controllers\UsuariosController;
-
 use App\Http\Middleware\Autenticador;
 use Illuminate\Support\Facades\Route;
 
-
+      
 
 Route::resource('/users', UsuariosController::class);
 Route::get('/login', [UsuariosController::class, "telaLogin"])->name("login");
@@ -75,6 +71,7 @@ Route::middleware(['autenticador'])->group(function () {
     //professor
     Route::middleware(['professor'])->group(function () {
         // Route::resource('/publicacoes', PublicacoesController::class);
+
         Route::resource('/publicacoes', PublicacoesController::class, );
         Route::get('/murais', [MuraisController::class, 'index']);
         Route::resource('/autor', AutorController::class);

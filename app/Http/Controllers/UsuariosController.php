@@ -66,10 +66,10 @@ class UsuariosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $usuario)
+    public function update(Request $request, User $user)
     {
-        $usuario->fill($request->all());
-        $usuario->save();
+        $user->fill($request->all());
+        $user->save();
         return "atualizado com sucesso";
     }
 
