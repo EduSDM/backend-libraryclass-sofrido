@@ -70,9 +70,10 @@ Route::middleware(['autenticador'])->group(function () {
     });
     //professor
     Route::middleware(['professor'])->group(function () {
-        // Route::resource('/publicacoes', PublicacoesController::class);
+        Route::resource('/publicacoes', PublicacoesController::class);
+        
 
-        Route::resource('/publicacoes', PublicacoesController::class, );
+       // Route::get('/publicacoes', [PublicacoesController::class, 'index'] );
         Route::get('/murais', [MuraisController::class, 'index']);
         Route::resource('/autor', AutorController::class);
         Route::resource('/resenhas', ResenhasController::class);
