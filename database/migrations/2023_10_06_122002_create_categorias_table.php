@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('categorias', function (Blueprint $table) {
             $table->id('id_categorias');
+            $table->string('descricao_categoria');            
             $table->timestamps();
             $table->foreignIdFor(Secao::class, "id_secao");
         });

@@ -12,9 +12,9 @@ class CategoriasController extends Controller
      */
     public function index(Categoria $categoria)
     {
-        $token = csrf_token();
+    
         $categorias = Categoria::all();
-        echo $token . "\n";
+   
         return $categorias;
     }
 

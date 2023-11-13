@@ -34,9 +34,8 @@ Route::middleware(['autenticador'])->group(function () {
     Route::get('/livros', [LivrosController::class, 'index']);
     Route::get('/emprestimos', [EmprestimosController::class, 'index']);
     Route::get('/devolucaos', [DevolucoesController::class, 'index']);
-    Route::get('/categorias', [CategoriasController::class, 'index']);
     // Route::resource('/avaliacaoPeriodicas', AvaliacoesPeriodicasController::class);
-    Route::get('/secoes', [SecoesController::class, 'index']);
+  
 
     //diretor 
     Route::middleware(['diretor'])->group(function () {
@@ -49,9 +48,8 @@ Route::middleware(['autenticador'])->group(function () {
         Route::resource('/livros', LivrosController::class);
         Route::resource('/emprestimos', EmprestimosController::class);
         Route::resource('/devolucaos', DevolucoesController::class);
-        Route::resource('/categorias', CategoriasController::class);
         Route::resource('/avaliacaoPeriodicas', AvaliacoesPeriodicasController::class);
-        Route::resource('/secoes', SecoesController::class);
+    
     });
     //coordenador
     Route::middleware(['coordenador'])->group(function () {
@@ -64,9 +62,8 @@ Route::middleware(['autenticador'])->group(function () {
         Route::resource('/livros', LivrosController::class);
         Route::resource('/emprestimos', EmprestimosController::class);
         Route::resource('/devolucaos', DevolucoesController::class);
-        Route::resource('/categorias', CategoriasController::class);
         Route::resource('/avaliacaoPeriodicas', AvaliacoesPeriodicasController::class);
-        Route::resource('/secoes', SecoesController::class);
+
     });
     //professor
     Route::middleware(['professor'])->group(function () {
@@ -82,8 +79,10 @@ Route::middleware(['autenticador'])->group(function () {
         Route::resource('/livros', LivrosController::class);
         Route::resource('/emprestimos', EmprestimosController::class);
         Route::resource('/devolucaos', DevolucoesController::class);
-        Route::resource('/categorias', CategoriasController::class);
         Route::resource('/avaliacaoPeriodicas', AvaliacoesPeriodicasController::class);
-        Route::resource('/secoes', SecoesController::class);
+    
     });
+
 });
+Route::resource('/secoes', SecoesController::class );
+Route::resource('/categorias', CategoriasController::class);

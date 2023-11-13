@@ -12,9 +12,9 @@ class  SecoesController extends Controller
      */
     public function index()
     {
-        $token = csrf_token();
+  
         $reservas = Secao::all();
-        echo $token . "\n";
+    
         return $reservas;
        // return Secao::all();
     }
