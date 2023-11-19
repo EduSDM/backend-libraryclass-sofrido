@@ -12,10 +12,8 @@ class LivrosController extends Controller
      */
     public function index(Livro $livro)
     {
-        $token = csrf_token();
         $livros = Livro::all();
-        echo $token . "\n";
-        return $livros;
+        return response()->json($livros);
     }
 
     /**
@@ -31,8 +29,15 @@ class LivrosController extends Controller
      */
     public function store(Request $request)
     {
-        Livro::create($request->all());
-        return 'criado com sucesso';
+        $livros=Livro::create([
+            'isbn_livros'=>$request->isbn_livros,
+            'titulo_livros' =>$request->titulo_livros,
+            'foto_livros' =>$request->file('foto_livros')->store('livros','public'),
+            'sinopse_livros'=>$request->sinopse_livros,
+            'id_secao'=>$request->id_secao,
+        ]);
+        
+        return response()->json('Livro adicionado com sucesso');
     }
 
     /**
@@ -58,7 +63,7 @@ class LivrosController extends Controller
     {
         $livro->fill($request->all());
         $livro->save();
-        return "atualizado com sucesso";
+        return response()->json('atualizado');
     }
 
     /**
