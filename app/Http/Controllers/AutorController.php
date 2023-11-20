@@ -46,7 +46,8 @@ class AutorController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $autor = Autor::find($id);
+        return $autor;
     }
 
     /**
