@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('descricao');
             $table->timestamps();
             $table->foreignIdFor(Livro::class, "isbn_livros"); 
+            
         });
     }
 

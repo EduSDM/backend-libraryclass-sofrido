@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Livro;
 use App\Models\User;
 use App\Models\Usuario;
 use Illuminate\Database\Migrations\Migration;
@@ -17,6 +18,7 @@ return new class extends Migration
             $table->string("id_emprestimos");
             $table->date("data_emprestimos");
             $table->foreignIdFor(User::class,"id_usuarios");
+            $table->foreignIdFor(Livro::class,"isbn_livros");
             $table->timestamps();
         });
     }
