@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id('id_reservas');
             $table->date('data_reservas');
             $table->foreignIdFor(Livro::class,"isbn_livros");
+            $table->foreignIdFor(User::class,"id_usuarios");
             $table->timestamps();
         });
     }
