@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Session;
 class UsuariosController extends Controller
 {
     /**
@@ -82,32 +84,50 @@ class UsuariosController extends Controller
         return 'usuario deletado com sucesso';
     }
 
-    public function login(Request $request)
-    {
-        $dados = $request->only("email", "password"); //pega tudo enviado pela requisicao 
+    use Illuminate\Support\Facades\Auth;
 
+    use Illuminate\Support\Facades\Auth;
 
-        if (Auth::attempt($dados)) {
-            $tipoDoUsuario = Auth::user()->tipo;
-            if ($tipoDoUsuario == 1) {
-                session(['tipo' => 'usuario comum']);
-            } elseif ($tipoDoUsuario == 2) {
-                session(['tipo' => 'professor']);
-            } elseif ($tipoDoUsuario == 3) {
-                session(['tipo' => 'coordenador']);
-            } elseif ($tipoDoUsuario == 4) {
-                session(['tipo' => 'diretor']);
-            }
-            return "usuario logado com susseco";
-        } else {
-            return "usuario ou senha incoretos";
-        }
+public function login(Request $request)
+{
+    $dados = $request->only("email", "password");
 
+    if (Auth::attempt($dados)) {
+        $user = Auth::user();
+        $tipoDoUsuario = $user->tipo;
+
+        $token = $user->createToken('NomeDoToken')->accessToken;
+
+        return response()->json(['token' => $token, 'tipo' => $this->getTipoLabel($tipoDoUsuario)]);
+    } else {
+        return response()->json(['error' => 'Credenciais inválidas'], 401);
     }
+}
 
+private function getTipoLabel($tipoDoUsuario)
+{
+    switch ($tipoDoUsuario) {
+        case 1:
+            return 'usuario_comum';
+        case 2:
+            return 'professor';
+        case 3:
+            return 'coordenador';
+        case 4:
+            return 'diretor';
+        default:
+            return 'desconhecido';
+    }
+}
+
+    
     public function telaLogin()
     {
         return "essa e a tela de login";
+    }
+
+    public function checking(Request $request){
+        return response()->json(Auth::check());
     }
 
     public function logout(Request $request)
