@@ -12,9 +12,7 @@ class AutorController extends Controller
      */
     public function index(Autor $autor)
     {
-        $token = csrf_token();
         $autor = Autor::all();
-        echo $token . "\n";
         return  $autor; 
     }
 
