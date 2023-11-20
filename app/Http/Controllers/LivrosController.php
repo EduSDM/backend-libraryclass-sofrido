@@ -29,16 +29,18 @@ class LivrosController extends Controller
      */
     public function store(Request $request)
     {
-        $livros=Livro::create([
-            'isbn_livros'=>$request->isbn_livros,
-            'titulo_livros' =>$request->titulo_livros,
-            'foto_livros' =>$request->file('foto_livros')->store('livros','public'),
-            'sinopse_livros'=>$request->sinopse_livros,
-            'id_secao'=>$request->id_secao,
+    
+        $livro = Livro::create([
+            'isbn_livros' => $request->isbn_livros,
+            'titulo_livros' => $request->titulo_livros,
+            'foto_livros' => $request->file('foto_livros')->store('livros', 'public'),
+            'sinopse_livros' => $request->sinopse_livros,
+            'id_secao' => $request->id_secao,
         ]);
-        
-        return response()->json('Livro adicionado com sucesso');
+    
+        return response()->json(['message' => 'Livro criado com sucesso', 'livro' => $livro], 201);
     }
+
 
     /**
      * Display the specified resource.
