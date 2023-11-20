@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('fichadoslivros', function (Blueprint $table) {
             $table->string('id_ficha_livros');
-            $table->foreignIdFor(Multa::class,"id_multas");
+            $table->foreignIdFor(Multa::class,"id_multas")->nullable();
             $table->foreignIdFor(Livro::class, "isbn_livros");
             $table->foreignIdFor(Emprestimo::class,"id_emprestimos");
             $table->timestamps();
