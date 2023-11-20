@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('avaliacoesperiodicas', function (Blueprint $table) {
             $table->id('id_avaliacoesPeriodicas');
+            $table->string('descricao');
             $table->timestamps();
             $table->foreignIdFor(Livro::class, "isbn_livros"); 
         });
