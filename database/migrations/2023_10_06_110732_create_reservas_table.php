@@ -15,7 +15,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('reservas', function (Blueprint $table) {
-            $table->string('id_reservas');
+            $table->id('id_reservas');
             $table->date('data_reservas');
             $table->foreignIdFor(Livro::class,"isbn_livros");
             $table->timestamps();
