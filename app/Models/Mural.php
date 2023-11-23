@@ -11,7 +11,7 @@ class Mural extends Model
 
     protected $table="murais";
     protected $primaryKey="id_mural";
-    protected $fillable=["id_mural","tipo","descricao"];
+    protected $fillable=["id_mural","tipo","descricao","cargo"];
     public $timestamps=false; 
     public function publicacoes(){
        return $this->belongsTo(Publicacao::class);

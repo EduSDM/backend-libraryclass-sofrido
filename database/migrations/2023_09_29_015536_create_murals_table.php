@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('id_mural');
             $table->char('tipo',1);
             $table->string('descricao',255);
+            $table->string('cargo',255);
             
         });
     }
