@@ -12,9 +12,7 @@ class AvaliacoesPeriodicasController extends Controller
      */
     public function index( AvaliacaoPeriodica $avaliacaoPeriodica)
     {
-        $token = csrf_token();
         $avaliacoesPeriodicas = AvaliacaoPeriodica::all();
-        echo $token . "\n";
         return $avaliacoesPeriodicas;
     }
 

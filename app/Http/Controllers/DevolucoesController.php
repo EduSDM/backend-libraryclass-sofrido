@@ -13,9 +13,7 @@ class DevolucoesController extends Controller
      */
     public function index(Devolucao $devolucao)
     {
-    $token = csrf_token();
     $devolucoes = $devolucao::all();
-    echo $token . "\n";
     return $devolucoes; 
     }
 

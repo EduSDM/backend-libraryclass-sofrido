@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Publicacao;
 use App\Models\User;
-use Illuminate\Contracts\Queue\ShouldBeUniqueUntilProcessing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use \Firebase\JWT\JWT;
 use Illuminate\Support\Facades\Hash;
 
 class UsuariosController extends Controller
@@ -84,30 +83,64 @@ class UsuariosController extends Controller
 
     public function login(Request $request)
     {
-        $dados = $request->only("email", "password"); //pega tudo enviado pela requisicao 
-
-
+        $dados = $request->only("email", "password");
+    
         if (Auth::attempt($dados)) {
-            $tipoDoUsuario = Auth::user()->tipo;
-            if ($tipoDoUsuario == 1) {
-                session(['tipo' => 'usuario comum']);
-            } elseif ($tipoDoUsuario == 2) {
-                session(['tipo' => 'professor']);
-            } elseif ($tipoDoUsuario == 3) {
-                session(['tipo' => 'coordenador']);
-            } elseif ($tipoDoUsuario == 4) {
-                session(['tipo' => 'diretor']);
-            }
-            return "usuario logado com susseco";
+            $user = Auth::user();
+            $tipoDoUsuario = $user->tipo;
+    
+            // Defina as informações adicionais que deseja incluir no token
+            $informacoesAdicionais = [
+                'tipo' => $this->getTipoLabel($tipoDoUsuario),
+                'outras_informacoes' => 'valor_qualquer',
+            ];
+    
+            // Defina o tempo de expiração do token (por exemplo, 1 hora a partir de agora)
+            $expiracao = now()->addHour()->timestamp;
+    
+            // Construa o payload do token
+            $payload = [
+                'iss' => 'LibraryClass', // Emissor do token (pode ser seu domínio)
+                'sub' => $user->id, // Assunto do token (por exemplo, ID do usuário)
+                'iat' => now()->timestamp, // Timestamp de emissão do token
+                'exp' => $expiracao, // Timestamp de expiração do token
+                'data' => $informacoesAdicionais, // Informações adicionais
+            ];
+    
+            // Gere o token usando a função encode
+            $token = JWT::encode($payload, 'librayclass', 'HS256');
+    
+            return response()->json(['token' => $token, 'expira_em' => $expiracao]);
         } else {
-            return "usuario ou senha incoretos";
+            return response()->json(['error' => 'Credenciais inválidas'], 401);
         }
-
+    }
+    
+    private function getTipoLabel($tipoDoUsuario)
+    {
+        switch ($tipoDoUsuario) {
+            case 0:
+                return 'usuario_comum';
+            case 1:
+                return 'professor';
+            case 2:
+                return 'coordenador';
+            case 3:
+                return 'diretor';
+            default:
+                return 'desconhecido';
+        }
+    
     }
 
+    
     public function telaLogin()
     {
         return "essa e a tela de login";
+    }
+
+    public function checking(Request $request){
+        return response()->json(Auth::check());
     }
 
     public function logout(Request $request)
