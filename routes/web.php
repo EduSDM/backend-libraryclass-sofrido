@@ -5,6 +5,7 @@ use App\Http\Controllers\AvaliacoesPeriodicasController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\DevolucoesController;
 use App\Http\Controllers\EmprestimosController;
+use App\Http\Controllers\FichadosLivrosController;
 use App\Http\Controllers\LivrosController;
 use App\Http\Controllers\MuraisController;
 use App\Http\Controllers\PublicacoesController;
@@ -43,7 +44,7 @@ Route::resource('/emprestimos', EmprestimosController::class);
 
 Route::resource('/devolucaos', DevolucoesController::class);
 
-Route::resource('/avaliacaoPeriodicas', AvaliacoesPeriodicasController::class);
+Route::resource('/fichadoLivro', FichadosLivrosController::class);
 
 Route::resource('/secoes', SecoesController::class );
 Route::resource('/categorias', CategoriasController::class);
