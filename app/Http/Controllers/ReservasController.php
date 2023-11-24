@@ -69,4 +69,25 @@ class ReservasController extends Controller
         Reserva::destroy($id);
         return "Deletado com sucesso";
     }
+    public function obterDadosReserva()
+{
+    $dadosReservas = \DB::table('reservas')
+        ->join('livros', 'reservas.isbn_livros', '=', 'livros.isbn')
+        ->join('users', 'reservas.id_usuarios', '=', 'users.id_usuarios')
+        ->join('secoes', 'reservas.id_secao', '=', 'secoes.id_secao')
+        ->select(
+            'reservas.id_reservas',
+            'reservas.data_reservas',
+            'reservas.status_reserva',
+            'livros.isbn as isbn_livro',
+            'livros.nome as nome_livro',
+            'users.id_usuarios',
+            'users.nome as nome_usuario',
+            'secoes.id_secao',
+            'secoes.descricao'
+        )
+        ->get();
+
+    return $dadosReservas;
+}
 }

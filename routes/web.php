@@ -48,3 +48,7 @@ Route::resource('/fichadoLivro', FichadosLivrosController::class);
 
 Route::resource('/secoes', SecoesController::class );
 Route::resource('/categorias', CategoriasController::class);
+
+Route::get('/obterReserva',[ReservasController::class,'obterDadosReserva']);
+
+Route::get('/maisemprestados',[LivrosController::class,'maisemprestados']);
