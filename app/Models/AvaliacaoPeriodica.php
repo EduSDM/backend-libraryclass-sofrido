@@ -11,7 +11,10 @@ class AvaliacaoPeriodica extends Model
     
     protected $table = "avaliacoesPeriodicas";
     protected $primaryKey = "id_avaliacoesPeriodicas";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9e3fa90bebd251e9709842251f2fa552a14f890e
     protected $fillable = ["id_avaliacoesPeriodicas", "isbn_livros", "descricao"];
 
     public $timestamps = false;
