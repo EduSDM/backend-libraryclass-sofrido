@@ -76,4 +76,12 @@ class LivrosController extends Controller
         Livro::destroy($id);
         return 'deletado com sucesso';
     }
+    public function maisemprestados(){
+        $livrosPriorizados = Livro::leftJoin('emprestimos', 'livros.isbn_livros', '=', 'emprestimos.isbn_livros')
+    ->select('livros.*', \DB::raw('COUNT(emprestimos.id_emprestimos) as total_emprestimos'))
+    ->groupBy('livros.isbn_livros')
+    ->orderByDesc('total_emprestimos')
+    ->get();
+        return $livrosPriorizados;
+    }
 }
