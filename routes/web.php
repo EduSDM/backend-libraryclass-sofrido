@@ -50,5 +50,7 @@ Route::resource('/secoes', SecoesController::class );
 Route::resource('/categorias', CategoriasController::class);
 
 Route::get('/obterReserva',[ReservasController::class,'obterDadosReserva']);
+Route::get('/obterReservaAtivas',[ReservasController::class,'obterDadosReservaAtivas']);
+
 
 Route::get('/maisemprestados',[LivrosController::class,'maisemprestados']);
