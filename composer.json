@@ -7,8 +7,8 @@
     "require": {
         "php": "^8.1",
         "doctrine/dbal": "^3.7",
-        "froiden/sql-generator": "dev-master",
         "firebase/php-jwt": "^6.9",
+        "froiden/sql-generator": "dev-master",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/passport": "^11.10",
