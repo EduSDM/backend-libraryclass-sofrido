@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Autor;
 use App\Models\Secao;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,6 +19,8 @@ return new class extends Migration
             $table->string('foto_livros');
             $table->string('sinopse_livros');
             $table->foreignIdFor(Secao::class, "id_secao");
+            $table->foreignIdFor(Autor::class, "id");
+
            
         });
     }
