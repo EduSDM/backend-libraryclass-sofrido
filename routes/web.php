@@ -7,6 +7,7 @@ use App\Http\Controllers\DevolucoesController;
 use App\Http\Controllers\EmprestimosController;
 use App\Http\Controllers\FichadosLivrosController;
 use App\Http\Controllers\LivrosController;
+use App\Http\Controllers\MultasController;
 use App\Http\Controllers\MuraisController;
 use App\Http\Controllers\PublicacoesController;
 use App\Http\Controllers\ResenhasController;
@@ -50,5 +51,7 @@ Route::resource('/secoes', SecoesController::class );
 Route::resource('/categorias', CategoriasController::class);
 
 Route::get('/obterReserva',[ReservasController::class,'obterDadosReserva']);
+Route::get('/obterReservaAtivas',[ReservasController::class,'obterDadosReservaAtivas']);
+
 
 Route::get('/maisemprestados',[LivrosController::class,'maisemprestados']);

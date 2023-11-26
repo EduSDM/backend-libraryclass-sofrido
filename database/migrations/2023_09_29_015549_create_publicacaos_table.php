@@ -17,6 +17,7 @@ return new class extends Migration
         Schema::create('publicacoes', function (Blueprint $table) {
             $table->string('id_publicacao');
             $table->string('mensagem',255);
+            $table->string('imagem_publicacao');
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Mural::class);
             $table->timestamps();

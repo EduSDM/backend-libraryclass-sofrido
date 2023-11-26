@@ -96,6 +96,35 @@ return $dadosReservas;
 
 
     
+public function obterDadosReservaAtivas()
+{
+    $dadosReservas = \DB::table('reservas')
+    ->join('livros', 'reservas.isbn_livros', '=', 'livros.isbn_livros')
+    ->join('users', 'reservas.id_usuarios', '=', 'users.id_usuarios')
+    ->select(
+        'reservas.id_reservas',
+        'reservas.data_reservas',
+        'reservas.status_reserva',
+        'livros.isbn_livros',
+        'livros.titulo_livros',
+        'users.id_usuarios',
+        'users.nome'
+    )
+    ->where('reservas.status_reserva', '=', 1)
+    ->whereNotNull('reservas.id_reservas')  
+    ->get();
+
+return $dadosReservas;
+
+}
+
+
+
+
+
+
+
+    
 
 }
 
