@@ -31,8 +31,13 @@ class PublicacoesController extends Controller
      */
     public function store(Request $request)
     {
-        Publicacao::create($request->all());
-        return 'Criado com sucesso';
+        $publicacao = Publicacao::create([
+            'titulo' => $request->isbn_livros,
+            'conteudo' => $request->titulo_livros,
+            'imagem_publicacao' => $request->file('imagem_publicacao')->store('noticias', 'public'),
+        ]);
+    
+        return response()->json(['message' => 'Noticia criada com sucesso', 'noticia' => $publicacao], 201);
     }
 
     /**
