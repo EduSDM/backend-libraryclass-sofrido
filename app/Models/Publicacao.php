@@ -11,12 +11,9 @@ class Publicacao extends Model
     protected $table="publicacoes";
     protected $primaryKey="id_publicacoes";
     
-    protected $fillable=["id_publicacao", "id_mural", "id_usuarios", "mensagem"];
+    protected $fillable=["id_publicacao", "imagem_publicacao", "titulo", "conteudo"];
     public function usuarios(){
        return $this->hasMany(User::class);
 
-    }
-    public function murais(){
-       return $this->hasMany(Mural::class);
     }
 }

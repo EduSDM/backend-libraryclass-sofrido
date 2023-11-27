@@ -12,9 +12,7 @@ class PublicacoesController extends Controller
      */
     public function index(Publicacao $publicacao)
     {
-        $token = csrf_token();
         $publicacoes = Publicacao::all();
-        echo $token . "\n";
         return $publicacoes;
     }
 
@@ -32,8 +30,8 @@ class PublicacoesController extends Controller
     public function store(Request $request)
     {
         $publicacao = Publicacao::create([
-            'titulo' => $request->isbn_livros,
-            'conteudo' => $request->titulo_livros,
+            'titulo' => $request->titulo,
+            'conteudo' => $request->conteudo,
             'imagem_publicacao' => $request->file('imagem_publicacao')->store('noticias', 'public'),
         ]);
     

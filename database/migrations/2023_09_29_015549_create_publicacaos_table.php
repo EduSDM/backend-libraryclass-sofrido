@@ -15,11 +15,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('publicacoes', function (Blueprint $table) {
-            $table->string('id_publicacao');
+            $table->id('id_publicacao');
             $table->string('titulo',255);
             $table->string('conteudo',255);
             $table->string('imagem_publicacao');
-            $table->foreignIdFor(User::class);
             $table->timestamps();
         });
     }
