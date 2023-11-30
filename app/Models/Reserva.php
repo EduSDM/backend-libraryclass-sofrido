@@ -14,4 +14,9 @@ class Reserva extends Model
 
     protected $fillable = ["id_reservas","data_reservas", "isbn_livros", "id_usuarios","status_reserva"];
 
+
+    public function usuario(){
+        return $this->belongsTo(User::class, 'id_usuarios');
+    }
+
 }

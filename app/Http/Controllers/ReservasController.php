@@ -31,8 +31,8 @@ class ReservasController extends Controller
     {
 
         try{
-            Reserva::create($request->all());
-            return "Criado com sucesso.";
+            $reserva=Reserva::create($request->all());
+            return response()->json($reserva);
         }catch(\Exception $e){
             return $e;
         }
@@ -76,22 +76,34 @@ class ReservasController extends Controller
     public function obterDadosReserva()
 {
     $dadosReservas = \DB::table('reservas')
-    ->join('livros', 'reservas.isbn_livros', '=', 'livros.isbn_livros')
-    ->join('users', 'reservas.id_usuarios', '=', 'users.id_usuarios')
-    ->select(
-        'reservas.id_reservas',
-        'reservas.data_reservas',
-        'reservas.status_reserva',
-        'livros.isbn_livros',
-        'livros.titulo_livros',
-        'users.id_usuarios',
-        'users.nome'
-    )
-    ->where('reservas.status_reserva', '=', 0)
-    ->whereNotNull('reservas.id_reservas')  
-    ->get();
+        ->join('livros', 'reservas.isbn_livros', '=', 'livros.isbn_livros')
+        ->join('users', 'reservas.id_usuarios', '=', 'users.id_usuarios')
+        ->join('secoes', 'livros.id_secao', '=', 'secoes.id_secao') 
+        ->select(
+            'reservas.id_reservas',
+            'reservas.data_reservas',
+            'reservas.status_reserva',
+            'livros.isbn_livros',
+            'livros.titulo_livros',
+            'livros.id_secao',
+            'secoes.descricao as secao_descricao', 
+            'users.id_usuarios',
+            'users.nome'
+        )
+        ->where('reservas.status_reserva', '=', 0)
+        ->whereNotNull('reservas.id_reservas')  
+        ->get();
 
-return $dadosReservas;
+    return $dadosReservas;
+}
+
+public function minhasReservas($usuario){
+    $reservas = \DB::table('reservas')
+        ->select('id_reservas', 'data_reservas', 'status_reserva') // Adicione outros campos conforme necessário
+        ->where('id_usuarios', $usuario)
+        ->get();
+
+    return response()->json($reservas, 200);
 
 }
 

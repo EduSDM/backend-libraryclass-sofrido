@@ -17,4 +17,9 @@ class Livro extends Model
 {
     return $this->belongsTo(Autor::class,'id');
 }
+
+public function secao()
+{
+    return $this->belongsTo(Secao::class, 'id_secao');
+}
 }

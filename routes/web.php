@@ -60,5 +60,7 @@ Route::get('/maisemprestados',[LivrosController::class,'maisemprestados']);
 Route::get('/ultimasPublicacoes',[PublicacoesController::class,'ultimasPublicacoes']);
 
 Route::get('/resenhasLivro/{livro}',[ResenhasController::class,'resenhasLivro']);
+Route::get('/minhasReservas/{usuario}',[ReservasController::class,'minhasReservas']);
+
 
 
