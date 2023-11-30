@@ -15,7 +15,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('emprestimos', function (Blueprint $table) {
-            $table->string("id_emprestimos");
+            $table->id("id_emprestimos");
             $table->date("data_emprestimos");
             $table->foreignIdFor(User::class,"id_usuarios");
             $table->foreignIdFor(Livro::class,"isbn_livros");

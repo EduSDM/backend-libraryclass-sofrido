@@ -9,7 +9,7 @@ class Publicacao extends Model
 {
     use HasFactory;
     protected $table="publicacoes";
-    protected $primaryKey="id_publicacoes";
+    protected $primaryKey="id_publicacao";
     
     protected $fillable=["id_publicacao", "imagem_publicacao", "titulo", "conteudo"];
     public function usuarios(){

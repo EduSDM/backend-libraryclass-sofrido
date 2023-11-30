@@ -31,8 +31,13 @@ class EmprestimosController extends Controller
      */
     public function store(Request $request)
     {
-        Emprestimo::create($request->all());
-        return 'criado com sucesso';
+        try{
+            Emprestimo::create($request->all());
+            return 'criado com sucesso';
+        }catch(\Exception $e){
+            return $e;
+        }
+        
     }
 
     /**

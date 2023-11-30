@@ -11,4 +11,10 @@ class Resenha extends Model
     protected $table = "resenhas";
     protected $primaryKey = "id_resenhas";
     protected $fillable = ["id_resenhas", "titulo_resenhas", "id_usuarios", "isbn_livros", "descricao_resenhas"];
+
+
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'id_usuarios');
+    }
 }

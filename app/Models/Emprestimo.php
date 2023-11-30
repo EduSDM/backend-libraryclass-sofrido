@@ -11,6 +11,6 @@ class Emprestimo extends Model
 
     protected $table = "emprestimos";
     protected $primaryKey = "id_emprestimos";
-    protected $fillable = ["id_emprestimos", "data_emprestimos", "id_usuarios"];
+    protected $fillable = ["data_emprestimos", "id_usuarios","isbn_livros"];
     public $timestamps = false;
 }

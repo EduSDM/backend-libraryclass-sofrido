@@ -29,8 +29,14 @@ class ReservasController extends Controller
      */
     public function store(Request $request)
     {
-       Reserva::create($request->all());
-       return "Criado com sucesso.";
+
+        try{
+            Reserva::create($request->all());
+            return "Criado com sucesso.";
+        }catch(\Exception $e){
+            return $e;
+        }
+       
     }
 
     /**

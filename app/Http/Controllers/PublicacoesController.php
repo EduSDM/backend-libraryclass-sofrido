@@ -15,7 +15,11 @@ class PublicacoesController extends Controller
         $publicacoes = Publicacao::all();
         return $publicacoes;
     }
-
+    public function ultimasPublicacoes()
+{
+    $publicacoes = Publicacao::orderBy('created_at', 'desc')->take(5)->get();
+    return $publicacoes;
+}
     /**
      * Show the form for creating a new resource.
      */
@@ -43,7 +47,13 @@ class PublicacoesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $noticia = Publicacao::find($id);
+
+    if ($noticia) {
+        return response()->json($noticia);
+    } else {
+        return response()->json(['message' => 'Notícia não encontrada'], 404);
+    }
     }
 
     /**

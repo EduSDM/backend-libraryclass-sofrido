@@ -29,16 +29,17 @@ class LivrosController extends Controller
      */
     public function store(Request $request)
     {
-    
-        $livro = Livro::create([
-            'isbn_livros' => $request->isbn_livros,
-            'titulo_livros' => $request->titulo_livros,
-            'foto_livros' => $request->file('foto_livros')->store('livros', 'public'),
-            'sinopse_livros' => $request->sinopse_livros,
-            'id_secao' => $request->id_secao,
-        ]);
-    
-        return response()->json(['message' => 'Livro criado com sucesso', 'livro' => $livro], 201);
+            $livro = Livro::create([
+                'isbn_livros' => $request->isbn_livros,
+                'titulo_livros' => $request->titulo_livros,
+                'foto_livros' => $request->file('foto_livros')->store('livros', 'public'),
+                'sinopse_livros' => $request->sinopse_livros,
+                'id_secao' => $request->id_secao,
+                'id' => $request->id
+            ]);
+        
+            return response()->json(['message' => 'Livro criado com sucesso', 'livro' => $livro], 201);
+
     }
 
 
@@ -47,7 +48,8 @@ class LivrosController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $livro=Livro::with('autor')->find($id);
+        return $livro;
     }
 
     /**
