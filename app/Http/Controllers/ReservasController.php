@@ -85,13 +85,11 @@ class ReservasController extends Controller
             'reservas.status_reserva',
             'livros.isbn_livros',
             'livros.titulo_livros',
-            'livros.id_secao',
-            'secoes.descricao as secao_descricao', 
+            'secoes.descricao',
             'users.id_usuarios',
             'users.nome'
         )
         ->where('reservas.status_reserva', '=', 0)
-        ->whereNotNull('reservas.id_reservas')  
         ->get();
 
     return $dadosReservas;

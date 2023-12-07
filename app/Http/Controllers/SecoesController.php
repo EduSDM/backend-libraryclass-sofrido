@@ -16,7 +16,6 @@ class  SecoesController extends Controller
         $reservas = Secao::all();
     
         return $reservas;
-       // return Secao::all();
     }
 
     /**

@@ -13,7 +13,7 @@ class LivrosController extends Controller
     public function index(Livro $livro)
     {
         $livros = Livro::all();
-        return response()->json($livros);
+        return $livros;
     }
 
     /**

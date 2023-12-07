@@ -15,9 +15,7 @@ class UsuariosController extends Controller
      */
     public function index()
     {
-        $token = csrf_token();
         $usuarios = User::all();
-        echo $token . "\n";
         return $usuarios;
     }
 
@@ -89,22 +87,20 @@ class UsuariosController extends Controller
             $user = Auth::user();
             $tipoDoUsuario = $user->tipo;
     
-            // Defina as informações adicionais que deseja incluir no token
             $informacoesAdicionais = [
                 'tipo' => $this->getTipoLabel($tipoDoUsuario),
                 'outras_informacoes' => 'valor_qualquer',
             ];
     
-            // Defina o tempo de expiração do token (por exemplo, 1 hora a partir de agora)
             $expiracao = now()->addHour()->timestamp;
     
-            // Construa o payload do token
+
             $payload = [
-                'iss' => 'LibraryClass', // Emissor do token (pode ser seu domínio)
-                'sub' => $user->id, // Assunto do token (por exemplo, ID do usuário)
-                'iat' => now()->timestamp, // Timestamp de emissão do token
-                'exp' => $expiracao, // Timestamp de expiração do token
-                'data' => $informacoesAdicionais, // Informações adicionais
+                'iss' => 'LibraryClass', 
+                'sub' => $user->id_usuarios, 
+                'iat' => now()->timestamp, 
+                'exp' => $expiracao, 
+                'data' => $informacoesAdicionais,
             ];
     
             // Gere o token usando a função encode
